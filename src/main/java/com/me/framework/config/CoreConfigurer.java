@@ -15,7 +15,7 @@ import java.util.List;
  * @version 1.0
  */
 @Configuration
-public class CoreConfig implements WebMvcConfigurer {
+public class CoreConfigurer implements WebMvcConfigurer {
 
     @Autowired
     private UserinfoMethodArgumentAnnotationResolver userinfoMethodArgumentAnnotationResolver;
