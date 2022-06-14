@@ -9,6 +9,11 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
+/** websocket Server
+ * @author yg
+ * @date 2022/6/14 19:19
+ * @version 1.0
+ */
 @ServerEndpoint("/websocket")
 @Component
 public class WebSocket {
