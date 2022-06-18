@@ -21,7 +21,7 @@ public class YamlUtil {
     }
 
     public YamlUtil(String path){
-        map = yaml.load(this.getClass().getResourceAsStream("/" + path));
+        map = yaml.load(ClassLoader.getSystemResourceAsStream(path));
     }
 
     /**
