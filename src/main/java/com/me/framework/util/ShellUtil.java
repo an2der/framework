@@ -49,12 +49,15 @@ public class ShellUtil {
             String line;
             StringBuilder stringBuilder = new StringBuilder();
             while ((line = bufferedReader.readLine()) != null){
-                stringBuilder.append(line);
+                stringBuilder.append(line + "\n");
             }
-            result.setContent(stringBuilder.toString());
             if(stringBuilder.length() == 0 && process.getErrorStream().available() > 0){
                 result.setSuccess(false);
+                while ((line = errorBufferedReader.readLine()) != null){
+                    stringBuilder.append(line + "\n");
+                }
             }
+            result.setContent(stringBuilder.toString());
             log.info("执行命令结束["+command+"]");
         } catch (Exception e) {
             result.setSuccess(false);
