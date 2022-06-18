@@ -75,7 +75,6 @@ public class ShellUtil {
         try {
             log.info("开始执行命令["+command+"]");
             process = Runtime.getRuntime().exec(commandPrefix + command);
-            process.waitFor();
             log.info("执行命令结束["+command+"]");
         } catch (Exception e) {
             log.error("执行脚本失败", e);
@@ -94,7 +93,6 @@ public class ShellUtil {
             try {
                 log.info("开始执行脚本["+file.getAbsolutePath()+"]");
                 process = Runtime.getRuntime().exec(commandPrefix + file.getAbsolutePath());
-                process.waitFor();
                 log.info("执行脚本结束["+file.getAbsolutePath()+"]");
             } catch (Exception e) {
                 log.error("执行脚本失败", e);
