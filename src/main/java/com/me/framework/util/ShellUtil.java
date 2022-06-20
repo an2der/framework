@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.concurrent.TimeUnit;
 
 /***
  * @author yg
@@ -53,6 +54,7 @@ public class ShellUtil {
             }
             if(stringBuilder.length() == 0 && process.getErrorStream().available() > 0){
                 result.setSuccess(false);
+                stringBuilder = new StringBuilder();
                 while ((line = errorBufferedReader.readLine()) != null){
                     stringBuilder.append(line + "\n");
                 }
@@ -75,6 +77,7 @@ public class ShellUtil {
         try {
             log.info("开始执行命令["+command+"]");
             process = Runtime.getRuntime().exec(commandPrefix + command);
+            process.waitFor(3, TimeUnit.SECONDS);
             log.info("执行命令结束["+command+"]");
         } catch (Exception e) {
             log.error("执行脚本失败", e);
@@ -87,12 +90,12 @@ public class ShellUtil {
 
     public static void execScript(String commandPrefix,String src){
         File file = new File(src);
-        System.out.println(file.getAbsolutePath());
         if(file.exists()) {
             Process process = null;
             try {
                 log.info("开始执行脚本["+file.getAbsolutePath()+"]");
                 process = Runtime.getRuntime().exec(commandPrefix + file.getAbsolutePath());
+                process.waitFor(3, TimeUnit.SECONDS);
                 log.info("执行脚本结束["+file.getAbsolutePath()+"]");
             } catch (Exception e) {
                 log.error("执行脚本失败", e);
