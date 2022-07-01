@@ -1,6 +1,6 @@
 package com.me.framework.handler;
 
-import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.me.framework.annotation.BusinessController;
 import com.me.framework.common.BusinessResponse;
 import org.springframework.core.MethodParameter;
@@ -38,9 +38,10 @@ public class ResponseReturnValueHandler implements HandlerMethodReturnValueHandl
             response.getOutputStream().flush();
             response.getOutputStream().close();
         }else{
+            ObjectMapper mapper = new ObjectMapper();
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-            response.getWriter().write(JSON.toJSONString(new BusinessResponse(o)));
+            response.getWriter().write(mapper.writeValueAsString(new BusinessResponse(o)));
             response.getWriter().flush();
             response.getWriter().close();
         }
