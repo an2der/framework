@@ -45,12 +45,15 @@ public class ShellUtil {
         try {
             log.info("开始执行命令["+command+"]");
             process = Runtime.getRuntime().exec(commandPrefix + command);
+            process.waitFor(3, TimeUnit.SECONDS);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream(), Charset.forName("GBK")));
             BufferedReader errorBufferedReader = new BufferedReader(new InputStreamReader(process.getErrorStream(), Charset.forName("GBK")));
             String line;
             StringBuilder stringBuilder = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null){
-                stringBuilder.append(line + "\n");
+            if(process.getInputStream().available() > 0) {
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line + "\n");
+                }
             }
             if(stringBuilder.length() == 0 && process.getErrorStream().available() > 0){
                 result.setSuccess(false);
