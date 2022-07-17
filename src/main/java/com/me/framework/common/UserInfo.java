@@ -22,6 +22,8 @@ public class UserInfo implements Serializable{
 	private String email;
 	private String headImg;
 	private boolean isAdmin = false;
+	private Long roleId;
+	private String roleName;
 	private Long departmentId;
 	private String departmentName;
 	private List<String> privileges;
@@ -97,6 +99,22 @@ public class UserInfo implements Serializable{
 
 	public void setAdmin(boolean admin) {
 		isAdmin = admin;
+	}
+
+	public Long getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 	public Long getDepartmentId() {
