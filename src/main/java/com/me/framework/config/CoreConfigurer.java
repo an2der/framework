@@ -16,12 +16,13 @@ import java.util.List;
 @Configuration
 public class CoreConfigurer implements WebMvcConfigurer {
 
-    @Autowired
+    @Autowired(required = false)
     private UserinfoMethodArgumentAnnotationResolver userinfoMethodArgumentAnnotationResolver;
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(userinfoMethodArgumentAnnotationResolver);
+        if(userinfoMethodArgumentAnnotationResolver != null) {
+            resolvers.add(userinfoMethodArgumentAnnotationResolver);
+        }
     }
-
 }
