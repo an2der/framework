@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * @version 1.0
  */
 @RestControllerAdvice
-public class RestExceptionHandler {
+public class GlobalExceptionHandler {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 

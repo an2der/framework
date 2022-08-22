@@ -12,8 +12,6 @@ import java.util.Map;
  */
 public class YamlUtil {
 
-    private Yaml yaml = new Yaml();
-
     private Map<String,Object> map;
 
     public YamlUtil(){
@@ -21,7 +19,7 @@ public class YamlUtil {
     }
 
     public YamlUtil(String path){
-        map = yaml.load(ClassLoader.getSystemResourceAsStream(path));
+        map = new Yaml().load(ClassLoader.getSystemResourceAsStream(path));
     }
 
     /**
