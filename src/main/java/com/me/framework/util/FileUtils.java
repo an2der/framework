@@ -43,4 +43,13 @@ public class FileUtils {
         }
         org.apache.commons.io.FileUtils.deleteDirectory(source);
     }
+
+    /**
+     * 清除windows文件名特殊字符
+     * @param name
+     * @return
+     */
+    public static String clearWindowsFileSpecialCharacter(String name){
+        return name.replaceAll("[\\\\\\/:\\*\\?\"<>\\|]","");
+    }
 }
