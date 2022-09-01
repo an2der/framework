@@ -48,6 +48,11 @@ public class ShellUtil {
             process.waitFor(3, TimeUnit.SECONDS);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream(), Charset.forName("GBK")));
             BufferedReader errorBufferedReader = new BufferedReader(new InputStreamReader(process.getErrorStream(), Charset.forName("GBK")));
+            int c = 3;
+            while (process.isAlive() && c > 0 && process.getInputStream().available() <= 0 && process.getErrorStream().available() <= 0){
+                c--;
+                TimeUnit.MILLISECONDS.sleep(500);
+            }
             String line;
             StringBuilder stringBuilder = new StringBuilder();
             if(process.getInputStream().available() > 0) {

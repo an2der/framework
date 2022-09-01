@@ -49,7 +49,16 @@ public class FileUtils {
      * @param name
      * @return
      */
-    public static String clearWindowsFileSpecialCharacter(String name){
-        return name.replaceAll("[\\\\\\/:\\*\\?\"<>\\|]","");
+    public static String clearWindowsFileNameSpecialCharacter(String name){
+        return name.replaceAll("[\\\\\\/:\\*\\?\"<>\\|]","#");
+    }
+
+    /**
+     * 清除windows文件路径特殊字符
+     * @param name
+     * @return
+     */
+    public static String clearWindowsFilePathSpecialCharacter(String name){
+        return name.replaceAll("[\\*\\?\"<>\\|]","#");
     }
 }
