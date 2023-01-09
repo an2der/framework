@@ -9,7 +9,7 @@ import java.util.Enumeration;
  * @date 2022/6/14 13:31
  * @version 1.0
  */
-public class IPUtils {
+public class IPUtil {
 
     public static InetAddress getLocalHostExactAddress() {
         try {

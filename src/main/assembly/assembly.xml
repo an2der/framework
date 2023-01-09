@@ -29,7 +29,7 @@
 		<file>
 			<source>${project.build.directory}/${project.build.finalName}.${project.packaging}</source>
 			<outputDirectory/>
-			<destName>${pkg.name}.jar</destName>
+			<destName>${project.artifactId}.jar</destName>
 		</file>
 		<file>
 			<source>src/main/resources/config/application-${env}.yml</source>

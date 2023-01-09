@@ -2,6 +2,8 @@ package com.me.framework.util;
 
 import org.yaml.snakeyaml.Yaml;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -12,14 +14,21 @@ import java.util.Map;
  */
 public class YamlUtil {
 
+    private Yaml yaml = new Yaml();
+
     private Map<String,Object> map;
 
-    public YamlUtil(){
+    public YamlUtil() throws IOException {
         this("application.yml");
     }
 
-    public YamlUtil(String path){
-        map = new Yaml().load(ClassLoader.getSystemResourceAsStream(path));
+    public YamlUtil(String path) throws IOException {
+        this(ClassLoader.getSystemResourceAsStream(path));
+    }
+
+    public YamlUtil(InputStream inputStream) throws IOException {
+        map = yaml.load(inputStream);
+        inputStream.close();
     }
 
     /**

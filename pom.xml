@@ -31,7 +31,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>${artifactId}-${version}.${packaging}</finalName>
+        <finalName>${artifactId}-${version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -50,7 +50,7 @@
                             <Class-Path>./</Class-Path>
                         </manifestEntries>
                         <manifestEntries>
-                            <Implementation-Title>file-system-server</Implementation-Title>
+                            <Implementation-Title>${project.artifactId}</Implementation-Title>
                             <Implementation-Version>${project.version}</Implementation-Version>
                         </manifestEntries>
                     </archive>

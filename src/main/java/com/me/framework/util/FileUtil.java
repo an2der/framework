@@ -12,7 +12,7 @@ import java.nio.file.StandardCopyOption;
  * @date 2022/8/22 17:07
  * @version 1.0
  */
-public class FileUtils {
+public class FileUtil {
 
     /**
      * 移动目录并替换已存在的文件
