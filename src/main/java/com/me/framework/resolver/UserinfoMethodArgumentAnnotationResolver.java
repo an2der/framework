@@ -1,6 +1,6 @@
 package com.me.framework.resolver;
 
-import com.me.framework.annotation.Userinfo;
+import com.me.framework.annotation.CurrentUser;
 import com.me.framework.common.UserInfo;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -17,7 +17,7 @@ public abstract class UserinfoMethodArgumentAnnotationResolver implements Handle
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.hasParameterAnnotation(Userinfo.class);
+        return parameter.hasParameterAnnotation(CurrentUser.class);
     }
 
     @Override
