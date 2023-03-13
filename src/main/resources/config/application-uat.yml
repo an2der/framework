@@ -1,0 +1,17 @@
+server:
+  port: 9099
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?autoReconnect=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=true
+    username: root
+    password: 123456
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.me.framework.model
+  configuration:
+    map-underscore-to-camel-case: false
+logging:
+  level:
+    cn.com.cx.testhome.dao: debug
+

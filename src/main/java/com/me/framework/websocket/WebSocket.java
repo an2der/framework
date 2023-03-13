@@ -1,5 +1,7 @@
 package com.me.framework.websocket;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -26,9 +28,9 @@ public class WebSocket {
      * 连接建立成功调用的方法
      */
     @OnOpen
-    public void onOpen(Session session) {
-        log.info("新客户端连入，id:" + session.getId());
+    public void onOpen(Session session) throws JsonProcessingException {
         SESSIONS.put(session.getId(), session);
+        sendMessage(session, new ObjectMapper().writeValueAsString(new WebSocketMessage(WebSocketMessage.SESSION_ID_MESSAGE_TYPE,session.getId())));
     }
 
 
@@ -37,7 +39,6 @@ public class WebSocket {
      */
     @OnClose
     public void onClose(Session session) {
-        log.info("一个客户端[{}]关闭连接,id:" + session.getId());
         try {
             SESSIONS.remove(session.getId());
             session.close();

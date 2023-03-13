@@ -15,6 +15,11 @@
     <artifactId>framework</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <mainClass>com.me.framework.Application</mainClass>
+        <springboot.mybatis.version>2.1.1</springboot.mybatis.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -25,9 +30,34 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${springboot.mybatis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.11.0</version>
         </dependency>
     </dependencies>
     <build>
@@ -42,7 +72,7 @@
                     </excludes>
                     <archive>
                         <manifest>
-                            <mainClass>cn.com.yl.fs.server.fsserverstarter.FsServerStarterApplication</mainClass>
+                            <mainClass>${mainClass}</mainClass>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
                         </manifest>
