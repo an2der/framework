@@ -77,11 +77,9 @@
                             <classpathPrefix>lib/</classpathPrefix>
                         </manifest>
                         <manifestEntries>
-                            <Class-Path>./</Class-Path>
-                        </manifestEntries>
-                        <manifestEntries>
                             <Implementation-Title>${project.artifactId}</Implementation-Title>
                             <Implementation-Version>${project.version}</Implementation-Version>
+                            <Class-Path>./</Class-Path>
                         </manifestEntries>
                     </archive>
                     <skip>${skipBuild}</skip>
