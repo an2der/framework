@@ -9,6 +9,7 @@ spring:
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.me.framework.model
+    mapper-scan-package: com.me.framework.dao
   configuration:
     map-underscore-to-camel-case: false
 logging:
