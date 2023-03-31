@@ -14,5 +14,5 @@ mybatis-plus:
     map-underscore-to-camel-case: false
 logging:
   level:
-    cn.com.cx.testhome.dao: info
+    ${mybatis-plus.mapper-scan-package}: info
 
