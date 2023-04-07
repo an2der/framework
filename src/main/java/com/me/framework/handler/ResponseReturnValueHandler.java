@@ -20,6 +20,14 @@ import java.nio.charset.StandardCharsets;
  */
 public class ResponseReturnValueHandler implements HandlerMethodReturnValueHandler, AsyncHandlerMethodReturnValueHandler {
 
+    private ObjectMapper mapper;
+
+    private ResponseReturnValueHandler(){}
+
+    public ResponseReturnValueHandler(ObjectMapper mapper){
+        this.mapper = mapper;
+    }
+
     @Override
     public boolean isAsyncReturnValue(Object o, MethodParameter methodParameter) {
         return supportsReturnType(methodParameter);
@@ -38,7 +46,6 @@ public class ResponseReturnValueHandler implements HandlerMethodReturnValueHandl
             response.getOutputStream().flush();
             response.getOutputStream().close();
         }else{
-            ObjectMapper mapper = new ObjectMapper();
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.setCharacterEncoding(StandardCharsets.UTF_8.name());
             response.getWriter().write(mapper.writeValueAsString(new BusinessResponse(o)));

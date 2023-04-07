@@ -1,6 +1,9 @@
 server:
   port: 8088
 spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/test?autoReconnect=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=true
@@ -14,5 +17,5 @@ mybatis-plus:
     map-underscore-to-camel-case: false
 logging:
   level:
-    ${mybatis-plus.mapper-scan-package}: debug
+    com.me.framework.dao: debug
 

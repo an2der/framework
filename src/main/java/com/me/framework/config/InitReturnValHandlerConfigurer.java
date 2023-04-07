@@ -1,12 +1,15 @@
 package com.me.framework.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.me.framework.handler.ResponseReturnValueHandler;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.jackson.JacksonProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +24,20 @@ public class InitReturnValHandlerConfigurer implements InitializingBean {
     @Autowired
     private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
 
+    @Autowired
+    private JacksonProperties jacksonProperties;
+
     @Override
     public void afterPropertiesSet() throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        if(jacksonProperties.getDateFormat() != null){
+            mapper.setDateFormat(new SimpleDateFormat(jacksonProperties.getDateFormat()));
+        }
+        if(jacksonProperties.getTimeZone() != null){
+            mapper.setTimeZone(jacksonProperties.getTimeZone());
+        }
         List<HandlerMethodReturnValueHandler> returnValueHandlers = new ArrayList<>();
-        returnValueHandlers.add(new ResponseReturnValueHandler());
+        returnValueHandlers.add(new ResponseReturnValueHandler(mapper));
         returnValueHandlers.addAll(requestMappingHandlerAdapter.getReturnValueHandlers());
         requestMappingHandlerAdapter.setReturnValueHandlers(returnValueHandlers);
     }

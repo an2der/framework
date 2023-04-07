@@ -12,7 +12,4 @@ mybatis-plus:
   mapper-scan-package: com.me.framework.dao
   configuration:
     map-underscore-to-camel-case: false
-logging:
-  level:
-    ${mybatis-plus.mapper-scan-package}: info
 
