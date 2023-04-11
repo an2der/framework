@@ -19,7 +19,7 @@ import javax.transaction.UserTransaction;
  */
 @Configuration
 @EnableTransactionManagement
-public class AtomikosTransactionManagerConfig {
+public class TransactionManagerConfig {
 
     @Bean(name = "userTransaction")
     public UserTransaction userTransaction() throws Throwable {
