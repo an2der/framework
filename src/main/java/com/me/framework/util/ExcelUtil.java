@@ -119,6 +119,8 @@ public class ExcelUtil {
     public <T> void exportExcel(String filename, Map<String,String> heads, List<T> data, HttpServletResponse response) {
         OutputStream outputStream = null;
         SXSSFWorkbook sxssfWorkbook = new SXSSFWorkbook();
+        List<Integer> columnWidth = new ArrayList<>();
+        int maxWidth = 30 * 256;
         try {
             outputStream = response.getOutputStream();
             String fileName = new String((filename + ".xlsx").getBytes("gb2312"), "iso-8859-1");
@@ -135,15 +137,16 @@ public class ExcelUtil {
             headStyle.setFont(headFont);
             headStyle.setAlignment(HorizontalAlignment.CENTER);
             headStyle.setVerticalAlignment(VerticalAlignment.CENTER);
-            headStyle.setWrapText(true);
             headStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
             headStyle.setFillForegroundColor(IndexedColors.SEA_GREEN.index);
+            headStyle.setWrapText(true);
             SXSSFCell headCell;
             int headIndex = 0;
             for(String head:heads.keySet()){
                 headCell = headRow.createCell(headIndex++);
                 headCell.setCellStyle(headStyle);
                 headCell.setCellValue(head);
+                columnWidth.add(head.getBytes().length  * 256);
             }
             //创建数据行
             Font dataFont = sxssfWorkbook.createFont();
@@ -153,7 +156,6 @@ public class ExcelUtil {
             dataStyle.setFont(dataFont);
             dataStyle.setAlignment(HorizontalAlignment.CENTER);
             dataStyle.setVerticalAlignment(VerticalAlignment.CENTER);
-            dataStyle.setWrapText(true);
             SXSSFRow dataRow;
             SXSSFCell dataCell;
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -163,7 +165,7 @@ public class ExcelUtil {
                 Class objClass = obj.getClass();
                 int dataIndex = 0;
                 for(String head:heads.keySet()){
-                    dataCell = dataRow.createCell(dataIndex++);
+                    dataCell = dataRow.createCell(dataIndex);
                     dataCell.setCellStyle(dataStyle);
                     PropertyDescriptor propertyDescriptor = new PropertyDescriptor(heads.get(head),objClass);
                     Method method = propertyDescriptor.getReadMethod();
@@ -174,10 +176,18 @@ public class ExcelUtil {
                         }else{
                             dataCell.setCellValue(value.toString());
                         }
+                        int width = (dataCell.getStringCellValue().getBytes().length + 3) * 256;
+                        if(width > columnWidth.get(dataIndex)){
+                            columnWidth.set(dataIndex,width);
+                        }
                     }else {
                         dataCell.setCellValue("");
                     }
+                    dataIndex++;
                 }
+            }
+            for (int i = 0; i < columnWidth.size(); i++) {
+                sxssfSheet.setColumnWidth(i,columnWidth.get(i) > maxWidth?maxWidth:columnWidth.get(i));
             }
             sxssfWorkbook.write(outputStream);
         } catch (Exception e) {
